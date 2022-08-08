@@ -9,7 +9,7 @@ import (
 )
 
 // ProviderSet is data providers.
-var ProviderSet = wire.NewSet(NewData, NewDB)
+var ProviderSet = wire.NewSet(NewData, NewDB, NewUserRepo)
 
 // Data .
 type Data struct {

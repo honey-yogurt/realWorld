@@ -33,24 +33,24 @@ type UserRepo interface {
 	//UpdateUser(ctx context.Context, user *User) (*User, error)
 }
 
-type ProfileRepo interface {
-	GetProfile(ctx context.Context, username string) (*Profile, error)
-	FollowUser(ctx context.Context, currentUserID uint, followingID uint) error
-	UnfollowUser(ctx context.Context, currentUserID uint, followingID uint) error
-	GetUserFollowingStatus(ctx context.Context, currentUserID uint, userIDs []uint) (following []bool, err error)
-}
+//type ProfileRepo interface {
+//	GetProfile(ctx context.Context, username string) (*Profile, error)
+//	FollowUser(ctx context.Context, currentUserID uint, followingID uint) error
+//	UnfollowUser(ctx context.Context, currentUserID uint, followingID uint) error
+//	GetUserFollowingStatus(ctx context.Context, currentUserID uint, userIDs []uint) (following []bool, err error)
+//}
 
 type UserUseCase struct {
-	ur  UserRepo
-	pr  ProfileRepo
+	ur UserRepo
+	//pr  ProfileRepo
 	log *log.Helper
 }
 
-func NewUserUseCase(ur UserRepo, pr ProfileRepo, log *log.Helper) *UserUseCase {
+//func NewUserUseCase(ur UserRepo, pr ProfileRepo, log *log.Helper) *UserUseCase {
+func NewUserUseCase(ur UserRepo, logger log.Logger) *UserUseCase {
 	return &UserUseCase{
 		ur:  ur,
-		pr:  pr,
-		log: log,
+		log: log.NewHelper(logger),
 	}
 }
 

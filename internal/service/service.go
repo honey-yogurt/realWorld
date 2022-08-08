@@ -1,6 +1,7 @@
 package service
 
 import (
+	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
 	v1 "realWorld/api/realworld/v1"
 	"realWorld/internal/biz"
@@ -13,10 +14,11 @@ var ProviderSet = wire.NewSet(NewRealWorldService)
 type RealWorldService struct {
 	v1.UnimplementedRealWorldServer
 
-	uc *biz.GreeterUsecase
+	uc  *biz.UserUseCase
+	log *log.Helper
 }
 
 // NewRealWorldService new a greeter service.
-func NewRealWorldService(uc *biz.GreeterUsecase) *RealWorldService {
-	return &RealWorldService{uc: uc}
+func NewRealWorldService(uc *biz.UserUseCase, logger log.Logger) *RealWorldService {
+	return &RealWorldService{uc: uc, log: log.NewHelper(logger)}
 }
